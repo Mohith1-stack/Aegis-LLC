@@ -1,0 +1,14 @@
+daemon:
+  polling_interval_ms: 5
+  confidence_threshold: 0.95
+  max_ring_buffer_size: 524288
+
+mitigation:
+  use_resctrl: true
+  resctrl_quarantine_mask: "0x1"
+  mba_throttle_pct: 10
+  fallback_cgroup_max: 1000
+
+telemetry:
+  window_size: 64
+  sampling_rate_hz: 10000

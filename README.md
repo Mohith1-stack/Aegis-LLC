@@ -1,7 +1,5 @@
 # AEGIS: Real-Time Microarchitectural Forensics & Hardware-Level Containment
 
-<div align="center">
-
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Python: 3.10+](https://img.shields.io/badge/Python-3.10%2B-brightgreen.svg)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-ee4c2c.svg)](https://pytorch.org/)
@@ -18,8 +16,6 @@
 [Quickstart](#quickstart) •
 [Evaluation](#evaluation--testing) •
 [Repository Structure](#repository-structure)
-
-</div>
 
 ---
 
@@ -309,5 +305,3 @@ When an attack is confirmed, AEGIS interacts with the kernel's `resctrl` subsyst
 ## License
 
 This project is licensed under the Apache License 2.0. See the [LICENSE](LICENSE) file for details.
-#   A e g i s - L L C  
- 

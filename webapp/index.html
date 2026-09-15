@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AEGIS System Monitor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <div class="sidebar">
+      <div class="logo">
+        <div class="logo-icon"></div>
+        <h2>AEGIS SOC</h2>
+      </div>
+      <nav class="nav-menu">
+        <a href="#" class="nav-item active" data-target="view-dashboard">System Overview</a>
+        <a href="#" class="nav-item" data-target="view-specs">Node Telemetry (Specs)</a>
+        <a href="#" class="nav-item" data-target="view-threats">Active Threats</a>
+        <a href="#" class="nav-item" data-target="view-mitigation">Mitigation Rules</a>
+      </nav>
+      <div class="simulation-panel">
+        <span class="demo-label">Demo Controls</span>
+        <button class="btn-danger" id="simulate-btn">Inject Threat Payload</button>
+      </div>
+    </div>
+
+    <div class="main-content">
+      <header class="topbar">
+        <div class="search-bar">
+          <input type="text" placeholder="Search Node ID, Process Hash, or Threat Signature...">
+        </div>
+        <div class="status-indicator" id="global-status">
+          <span class="status-dot"></span> System Secure
+        </div>
+      </header>
+
+      <!-- DASHBOARD VIEW -->
+      <div id="view-dashboard" class="dashboard view active-view">
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <span class="kpi-label">Active Processes</span>
+            <div class="kpi-value" id="processes-count">Scanning...</div>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">Cache Traces (24h)</span>
+            <div class="kpi-value" id="traces-count">14,208,931</div>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">Threats Mitigated</span>
+            <div class="kpi-value warning" id="threats-count">0</div>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">Resctrl Isolations</span>
+            <div class="kpi-value warning" id="isolations-count">0</div>
+          </div>
+        </div>
+
+        <div class="main-grid">
+          <div class="panel telemetry-panel">
+            <div class="panel-header">
+              <h3 title="Target Node: US-EAST-1-PROD">System Telemetry</h3>
+              <span class="badge active">ACTIVE</span>
+            </div>
+            <div class="cpu-matrix" id="cpu-matrix">
+              <!-- Rendered via JS -->
+            </div>
+            <div class="telemetry-legend">
+              <span class="legend-item"><span class="color-box normal"></span> Normal Load</span>
+              <span class="legend-item"><span class="color-box threat"></span> Malicious Spike</span>
+            </div>
+          </div>
+
+          <div class="panel incidents-panel">
+            <div class="panel-header">
+              <h3>Incident Response Log</h3>
+              <span class="badge offline">LIVE</span>
+            </div>
+            <div class="table-wrapper">
+              <table class="incidents-table">
+                <thead>
+                  <tr>
+                    <th>Timestamp</th>
+                    <th>Node ID</th>
+                    <th>PID</th>
+                    <th>Signature</th>
+                    <th>Severity</th>
+                    <th>Action Taken</th>
+                  </tr>
+                </thead>
+                <tbody id="incidents-body">
+                  <!-- JS Injected -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SPECS VIEW -->
+      <div id="view-specs" class="dashboard view hidden">
+        <div class="panel specs-panel">
+          <div class="panel-header">
+            <h3>Hardware Specifications (Node: US-EAST-1-PROD)</h3>
+            <button class="btn btn-refresh" id="refresh-specs-btn">Refresh Telemetry</button>
+          </div>
+          
+          <div class="specs-grid" id="specs-content">
+            <div class="loading-state">Scanning hardware architecture...</div>
+          </div>
+
+          <div class="vulnerability-banner hidden" id="vuln-banner">
+            <strong>⚠️ SECURITY WARNING:</strong> This CPU architecture is potentially vulnerable to 
+            microarchitectural cache side-channel attacks (Spectre/Meltdown variants). AEGIS Mitigations are strongly recommended.
+          </div>
+        </div>
+      </div>
+
+      <!-- THREATS VIEW -->
+      <div id="view-threats" class="dashboard view hidden">
+        <div class="panel">
+          <div class="panel-header">
+            <h3>Global Threat Intelligence</h3>
+          </div>
+          <div style="padding: 2rem; color: var(--text-muted);">
+            <p>Scanning local system for persistent threats...</p>
+            <br>
+            <p><strong>Status:</strong> No active unmitigated threats detected on this machine.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- MITIGATION VIEW -->
+      <div id="view-mitigation" class="dashboard view hidden">
+        <div class="panel">
+          <div class="panel-header">
+            <h3>AEGIS Hardware Mitigation Rules</h3>
+          </div>
+          <div style="padding: 2rem; color: var(--text-muted); line-height: 1.6;">
+            <p><strong>Rule 1 (CAT Isolation):</strong> Automatically assign malicious PIDs to a restricted `resctrl` Class of Service (CLOS), physically restricting their access to the Last-Level Cache.</p>
+            <p><strong>Rule 2 (Thread Pinning):</strong> Prevent suspicious threads from migrating to Core 0 (System Critical).</p>
+            <p><strong>Status:</strong> All automated hardware rules are currently ARMED and active.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
